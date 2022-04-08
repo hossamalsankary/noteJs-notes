@@ -1,11 +1,19 @@
-const EventEmitter = require("events");
-const eventEmitter = new EventEmitter();
+const EventEmitter = require('events');
 
-/*
-emit is used to trigger an event
-on  is used to add a callback function that's going to be executed when the event is triggered */
-eventEmitter.on("start", () => {
-  console.log("started");
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+
+// myEmitter.on('event', () => {
+//   console.log('an event occurred!');
+// });
+
+// myEmitter.emit('event');
+
+myEmitter.on('event', function(a, b) {
+  console.log(a, b,  this === myEmitter);
+ 
 });
+//NOTES if we convert this to arro func this keyword will no longer reference the EventEmitter instance
 
-eventEmitter.emit("start");
+myEmitter.emit('event', 'a', 'b');
